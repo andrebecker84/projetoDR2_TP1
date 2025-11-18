@@ -201,7 +201,7 @@ Não existe uma entidade "Conta" no código. O conceito está espalhado em duas 
 >            .collect(Collectors.toList());
 >}
 >```
->>
+>
 >> [!IMPORTANT]  
 >> #### Princípios aplicados:
 >> - SRP (responsabilidade única), encapsulamento, desacoplamento de I/O.
