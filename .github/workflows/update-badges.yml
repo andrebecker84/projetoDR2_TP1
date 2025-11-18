@@ -56,6 +56,9 @@ jobs:
           echo "coverage=0" >> $GITHUB_OUTPUT
         fi
 
+    - name: Create badges directory
+      run: mkdir -p .github/badges
+
     - name: Generate Test Badge
       run: |
         PASSED="${{ steps.metrics.outputs.passed }}"
