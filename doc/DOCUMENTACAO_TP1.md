@@ -1,19 +1,22 @@
-# DOCUMENTAÇÃO DETALHADA - Teste Performance 1 `DR2_TP1`
-## Refatoração de 12 Códigos Java com Clean Code
+DOCUMENTAÇÃO DETALHADA - Teste Performance 1 `DR2_TP1`
 
-```
-═════════════════════════════════════════════════════════════════════════
-  Escola Superior de Tecnologia da Informação - Instituto Infnet
-  https://www.infnet.edu.br/
+---
 
-  Bloco: Engenharia Disciplinada de Softwares
-  Disciplina: Engenharia de Software: Clean Code e Boas Práticas [DR2]
-  Trabalho: Teste de Performance 1 [TP1]
-  Professor: Rafael Bento Cruz
-  Aluno: André Luis Becker
-  Entrega: 11/11/2025
-═════════════════════════════════════════════════════════════════════════
-```
+# Engenharia Disciplinada de Softwares
+## TP1 - Refatorar Códigos em Java com Clean Code e Boas Práticas
+
+> [!IMPORTANT]
+> Escola Superior de Tecnologia da Informação  
+> Instituto Infnet - https://www.infnet.edu.br/
+>
+>       Bloco: Engenharia Disciplinada de Softwares
+>       Disciplina: Engenharia de Software: Clean Code e Boas Práticas [DR2]
+>       Trabalho: Teste de Performance 1 [TP1]
+>       Professor: Rafael Bento Cruz
+>       Aluno: André Luis Becker
+> 
+>       Entrega: 11/11/2025
+
 
 ## Sumário
 
@@ -58,7 +61,7 @@ Para cada exercício, segui um padrão:
 4. **Testes** → garantir que funciona e é testável
 5. **Documentação** → explicar por que fiz assim
 
-> [!IMPORTANT]  
+> [!WARNING]  
 > Isso não significa que cada decisão foi perfeita, mas tentei ser consciente do que estava fazendo e por quê.
 
 ---
@@ -104,7 +107,7 @@ Para cada exercício, segui um padrão:
 
 > Antes de entrar nas análises específicas, vale entender os **quatro objetivos fundamentais** que todo código de alta qualidade deve alcançar:
 
-> [!TIP]
+> [!IMPORTANT]
 > ### 4 Objetivos de Código de Alta Qualidade
 >
 >![4 Objetivos de Código de Qualidade](img/4_objetivos_codigo_qualidade.png)
@@ -172,7 +175,8 @@ Para cada exercício, segui um padrão:
 > - **Testabilidade prejudicada:** Como testar se o relatório está correto se ele imprime direto no console? Precisaria de hacks como redirecionar System.out, o que torna os testes frágeis.
 > - **Extensibilidade limitada:** Quer processar taxas diferentes por tipo de conta? Quer gerar relatórios em formatos diferentes? Com a estrutura atual, isso vira um pesadelo rapidamente.
 
->### Solução implementada:
+> [!TIP]
+> ### Solução implementada:
 >```java
 >// Agora cada conta é uma entidade coesa
 >public static class ContaFinanceira {
@@ -203,8 +207,8 @@ Para cada exercício, segui um padrão:
 >}
 >```
 
-> [!IMPORTANT]  
-> #### Princípios aplicados:
+> [!TIP]  
+> #### Soluções (_princípios aplicados_):
 > - SRP (responsabilidade única), encapsulamento, desacoplamento de I/O.
 
 ---
@@ -250,6 +254,7 @@ Para cada exercício, segui um padrão:
 > ### a.d) Eficácia na comunicação:
 > - O que este método faz? Valida? Processa? Imprime? Faz tudo junto. O nome `processar` é vago e não comunica intenção clara. As condições também não explicam *por que* 10 caracteres é o mínimo.
 
+> [!TIP]
 >### Solução implementada:
 >```java
 >private static final int TAMANHO_MINIMO = 10;  // Constante nomeada explica o "porquê"
@@ -282,7 +287,7 @@ Para cada exercício, segui um padrão:
 >}
 >```
 
-> [!IMPORTANT]
+> [!TIP]
 > #### Melhorias alcançadas:
 > - ✅ **Legibilidade:** Fluxo linear, sem aninhamento.
 > - ✅ **DRY:** Sem duplicação de lógica ou saída.
@@ -341,8 +346,9 @@ Para cada exercício, segui um padrão:
 > - **Extensibilidade:** Como fazer relatório em JSON? Como calcular impostos diferentes por categoria de produto? O código atual não oferece pontos de extensão claros. Você precisaria duplicar tudo.
 > - **Testabilidade:** Como testar se o cálculo está correto sem verificar o que foi impresso no console? Testes frágeis que dependem de strings hardcoded.
 
-### c) Solução implementada:
-- Dividi em **três camadas de abstração**:
+> [!TIP]
+>### c) Solução implementada:
+>- Dividi em **três camadas de abstração**:
 >`Camada 1: Modelo (Dados)`
 >```java
 >public static class ItemCarrinho {
@@ -356,7 +362,9 @@ Para cada exercício, segui um padrão:
 >}
 >```
 >>Cada item sabe calcular seu próprio subtotal. Princípio de responsabilidade única - o item conhece suas próprias regras.
-
+>
+> ---
+> 
 >`Camada 2: Serviço (Lógica de negócio)`
 >```java
 >public static class ServicoCarrinho {
@@ -374,7 +382,9 @@ Para cada exercício, segui um padrão:
 >}
 >```
 >> Serviço gerencia a coleção e coordena operações. Não sabe nada sobre como apresentar.
-
+>
+> ---
+> 
 >`Camada 3: Interface (Apresentação)`
 >```java
 >public static class FormatadorCarrinho {
@@ -385,7 +395,7 @@ Para cada exercício, segui um padrão:
 >```
 >>Formatador só cuida de apresentação. Fácil trocar por JSON, XML, ou qualquer outro formato sem tocar na lógica.
 
-> [!IMPORTANT]
+> [!TIP]
 > ### Benefícios alcançados:
 >   - ✅ Cada classe tem um único propósito claro.
 >   - ✅ Fácil adicionar novos campos (desconto, categoria) apenas no modelo.
@@ -449,7 +459,8 @@ Para cada exercício, segui um padrão:
 > 3. **Busca linear ineficiente**
 > Cada operação percorre toda a lista procurando por título. Em uma biblioteca com 10.000 livros, isso é desperdício. Um `Map<String, Livro>` seria muito mais eficiente.
 
-### b) Solução com duas classes separadas:
+> [!TIP]
+>### b) Solução com duas classes separadas:
 >#### `Classe Livro (Entidade)`
 >```java
 >public static class Livro {
@@ -479,7 +490,9 @@ Para cada exercício, segui um padrão:
 >}
 >```
 >>O Livro sabe seu próprio estado. Não precisa de ninguém dizendo se está disponível ou não - ele mesmo gerencia isso.
-
+>
+> ---
+> 
 >#### `Classe Biblioteca (Gerenciador de coleção)`
 >```java
 >public static class Biblioteca {
@@ -524,7 +537,7 @@ Para cada exercício, segui um padrão:
 >}
 >```
 
-> [!IMPORTANT]
+> [!TIP]
 > ### Benefícios alcançados:
 > - **Uso de `Optional`:** Em vez de retornar `null` (que causa NullPointerException), uso `Optional<Livro>` que força tratamento explícito de "não encontrado".
 > - **Responsabilidades bem definidas:**
@@ -572,7 +585,8 @@ Para cada exercício, segui um padrão:
 > ### Problema original:
 >   - A classe `SistemaBancario` faz tudo: guarda contas, gerencia saldos, valida transferências e imprime mensagens. Impossível testar transferências sem verificar strings de saída.
 
-### Solução em 3 camadas:
+> [!TIP]
+>### Solução em 3 camadas:
 >#### `Camada 1: MODELO (Representa uma conta)`
 >```java
 >public static class Conta {
@@ -598,7 +612,9 @@ Para cada exercício, segui um padrão:
 >}
 >```
 >>A conta conhece suas próprias operações básicas. Não sabe nada sobre transferências ou validações complexas.
-
+>
+> ---
+> 
 >#### `Camada 2: SERVIÇO (Lógica de negócio)`
 >```java
 >public static class ServicoBancario {
@@ -632,7 +648,9 @@ Para cada exercício, segui um padrão:
 >}
 >```
 >>O serviço coordena as validações e operações. Retorna um objeto (não imprime), permitindo que quem chamou decida o que fazer com o resultado.
-
+>
+> ---
+> 
 >#### `Camada 3: INTERFACE (Resultado da operação (DTO))`
 >```java
 >public static class ResultadoTransferencia {
@@ -655,7 +673,7 @@ Para cada exercício, segui um padrão:
 >```
 >>Um DTO (Data Transfer Object) que carrega o resultado. Quem recebe pode decidir se loga, imprime, envia email, etc.
 
-> [!IMPORTANT]
+> [!TIP]
 > ### Benefícios:
 >   - ✅ **Testável**: Consigo verificar se `transferir()` retorna sucesso/falha sem System.out
 >   - ✅ **Extensível**: Fácil adicionar transferências programadas, limites, etc.
@@ -687,6 +705,7 @@ Para cada exercício, segui um padrão:
 > ### Problema original:
 > - Um único método `gerarRelatorio()` faz tudo: imprime cabeçalho, itera clientes, formata linhas, imprime rodapé. Se eu quiser mudar apenas a formatação de uma linha, preciso entender o método inteiro.
 
+> [!TIP]
 >### Solução - Decomposição em funções pequenas:
 >```java
 >public List<String> gerarRelatorio(List<String> clientes, List<Double> saldos) {
@@ -721,7 +740,7 @@ Para cada exercício, segui um padrão:
 >}
 >```
 
-> [!IMPORTANT]
+> [!TIP]
 > ### Por que isso é melhor?
 > 1. **Funções fazem UMA coisa:** Cada método tem 1-3 linhas e um propósito cristalino. Não preciso de comentário porque o nome já diz tudo.
 > 2. **Reutilização:** Quer um relatório sem rodapé? Só não chama `adicionarRodape()`. Quer mudar formato do cabeçalho? Edita apenas `adicionarCabecalho()`.
@@ -783,7 +802,8 @@ Para cada exercício, segui um padrão:
 >conta.sacar(1000.00);  // Saldo era 100, agora é -900! ❌
 >```
 > Permite saldo negativo através de saque. Não há validação alguma.
->
+
+> [!TIP]
 >### b) Solução com validações e contratos explícitos:
 >```java
 >public class Ex07 {
@@ -859,7 +879,7 @@ Para cada exercício, segui um padrão:
 >}
 >```
 
-> [!IMPORTANT]
+> [!TIP]
 > ### Melhorias alcançadas:
 > #### `Contratos explícitos estabelecidos`:
 > - ✅ Titular nunca é nulo ou vazio
@@ -934,6 +954,7 @@ Para cada exercício, segui um padrão:
 >```
 > Problema: 90% dos comentários não agregam valor. Só repetem o que o código já diz.
 
+> [!TIP]
 >#### Solução (_código auto-explicativo_):
 >```java
 >public class Ex08 {
@@ -971,7 +992,7 @@ Para cada exercício, segui um padrão:
 >}
 >```
 
-> [!IMPORTANT]
+> [!TIP]
 > ### Melhorias aplicadas:
 >
 > a) **Removidos comentários redundantes:**
@@ -987,7 +1008,7 @@ Para cada exercício, segui um padrão:
 >   - Nomes claros dispensam explicações.
 >   - Estrutura simples não precisa de documentação extra.
 
-> [!TIP]
+> [!IMPORTANT]
 >
 > **Regra de ouro:** Comente o *por quê*, não o *quê*. Se você sente necessidade de comentar o "quê", refatore o código.
 
@@ -1013,6 +1034,7 @@ Para cada exercício, segui um padrão:
 > - Falta de espaçamento entre blocos.
 > - Nome de variável críptico (`v`).
 
+> [!TIP]
 >### Solução - Código organizado e legível:
 >```java
 >public class Ex09 {
@@ -1038,7 +1060,7 @@ Para cada exercício, segui um padrão:
 >}
 >```
 
-> [!IMPORTANT]
+> [!TIP]
 > ### Melhorias aplicadas:
 > 1. **Indentação consistente:** 4 espaços por nível.
 > 2. **Espaçamento:** Linhas em branco entre métodos.
@@ -1046,7 +1068,7 @@ Para cada exercício, segui um padrão:
 > 4. **Nomes significativos:** `v` virou `valor` (comunica intenção).
 > 5. **Guard clause:** Em vez de if aninhado, retorno antecipado.
 
-> [!TIP]
+> [!IMPORTANT]
 >
 > Sempre formate o código para facilitar a leitura, código é lido muito mais vezes do que é escrito!
 
@@ -1083,7 +1105,8 @@ Para cada exercício, segui um padrão:
 >
 > - O erro ocorre **dentro** de `toUpperCase()`, não onde o problema foi introduzido. Se quem chamou passou `null`, o rastreamento de pilha não ajuda muito.
 > - **Falha silenciosa:** Se estiver em ambiente de produção sem logs adequados, o erro pode passar despercebido ou crashar a aplicação sem contexto claro.
- 
+
+> [!TIP]
 >### Solução - Fail-fast com validação explícita:
 >```java
 >public String processar(String dado) {
@@ -1095,7 +1118,7 @@ Para cada exercício, segui um padrão:
 >}
 >```
 
-> [!IMPORTANT]
+> [!TIP]
 > ### Melhorias aplicadas:
 > #### Por que isso é melhor?
 > 1. **Fail-fast (falhe rápido):** 
@@ -1153,6 +1176,7 @@ Para cada exercício, segui um padrão:
 >}
 >```
 
+> [!TIP]
 > ### Solução - Classe de resposta com lista de erros:
 >```java
 >public static class ResultadoValidacao {
@@ -1210,8 +1234,8 @@ Para cada exercício, segui um padrão:
 >}
 >```
 
-> [!IMPORTANT]
-> ### Uso da nova validação:
+> [!TIP]
+> ### Solução com uso da nova validação:
 >```java
 >ResultadoValidacao resultado = validarCPF("123");
 >if (!resultado.isValido()) {
@@ -1258,6 +1282,7 @@ Para cada exercício, segui um padrão:
 > 3. Valor negativo é aceito sem validação.
 > 4. Não há distinção entre tipos de erro.
 
+> [!TIP]
 >### Solução - Exceções customizadas + Enum:
 >#### a) Exceções específicas criadas:
 >```java
@@ -1281,6 +1306,8 @@ Para cada exercício, segui um padrão:
 >    }
 >}
 >```
+>
+> ---
 >
 >#### b) Enum type-safe para métodos:
 >```java
@@ -1312,6 +1339,8 @@ Para cada exercício, segui um padrão:
 >}
 >```
 >
+> ---
+>
 >#### c) Tratamento estruturado:
 >```java
 >public String processarPagamento(double valor, String metodoStr)
@@ -1329,6 +1358,8 @@ Para cada exercício, segui um padrão:
 >            valor, metodo.getCodigo());
 >}
 >```
+>
+> ---
 >
 >#### Uso com tratamento diferenciado:
 >```java
