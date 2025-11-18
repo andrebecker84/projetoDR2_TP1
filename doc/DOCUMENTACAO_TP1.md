@@ -103,7 +103,7 @@ Para cada exercício, segui um padrão:
 ## 5. Análise dos 12 exercícios
 
 > Antes de entrar nas análises específicas, vale entender os **quatro objetivos fundamentais** que todo código de alta qualidade deve alcançar:
->
+
 > [!TIP]
 > ### 4 Objetivos de Código de Alta Qualidade
 >
