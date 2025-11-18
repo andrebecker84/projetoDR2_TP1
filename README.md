@@ -17,20 +17,8 @@ Trabalho acadêmico de **Engenharia de Software** focado em **Clean Code** e **b
 
 - O projeto apresenta a refatoração sistemática de 12 códigos Java com problemas estruturais, aplicando princípios fundamentais de engenharia de software conforme estabelecido por Robert C. Martin.
 
-<div style="background-color: #2c2d30; padding: 10px 20px; line-height: 2rem;border-radius: 6px; border-left: 6px solid #426fe4; box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.2);">
-
-  <strong style="color: #426fe4;">
-    <svg viewBox="0 0 16 16" width="16" height="16" fill="#426fe4" style="vertical-align: middle; margin-right: 4px;">
-      <path d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.5 7.75A.75.75 0 0 1 7.25 7h1a.75.75 0 0 1 .75.75v2.75h.25a.75.75 0 0 1 0 1.5h-2a.75.75 0 0 1 0-1.5h.25v-2h-.25a.75.75 0 0 1-.75-.75ZM8 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"></path>
-    </svg>
-    Observação
-  </strong><br>
-
-  <span style="color: #c9d1d9;">
-    O resultado são <code>12 exercícios</code>, todos refatorados com <code>46 testes</code> automatizados passando.
-  </span>
-
-</div>
+> [!NOTE]
+> O resultado são `12 exercícios`, todos refatorados com `46 testes` automatizados passando.
 
 ---
 
@@ -283,22 +271,12 @@ mvn test
 ```
 
 ### **Resultado esperado:**
-<div style="background-color: #2c2d30; padding: 10px 20px; line-height: 1.8rem; border-radius: 6px; border-left: 6px solid #a380f1; box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.2);">
 
-  <strong style="color: #a380f1;">
-    <svg viewBox="0 0 16 16" width="16" height="16" fill="#a380f1" style="vertical-align: middle; margin-right: 4px;">
-      <path d="M0 1.75C0 .784.784 0 1.75 0h12.5C15.216 0 16 .784 16 1.75v9.5A1.75 1.75 0 0 1 14.25 13H8.06l-2.573 2.573A1.458 1.458 0 0 1 3 14.543V13H1.75A1.75 1.75 0 0 1 0 11.25Zm1.75-.25a.25.25 0 0 0-.25.25v9.5c0 .138.112.25.25.25h2a.75.75 0 0 1 .75.75v2.19l2.72-2.72a.749.749 0 0 1 .53-.22h6.5a.25.25 0 0 0 .25-.25v-9.5a.25.25 0 0 0-.25-.25Zm7 2.25v2.5a.75.75 0 0 1-1.5 0v-2.5a.75.75 0 0 1 1.5 0ZM9 9a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z">
-      </path>
-    </svg>
-    Resultado Esperado:
-  </strong><br>
-
-  <span style="color: #c9d1d9; font-family: 'Courier New', Courier, monospace; font-size: 12px;">
-    ✔️<code>[INFO] Tests run: 46, Failures: 0, Errors: 0, Skipped: 0</code><br>
-    ✔️<code>[INFO] BUILD SUCCESS</code>
-  </span>
-
-</div>
+> [!TIP]
+> ```
+> [INFO] Tests run: 46, Failures: 0, Errors: 0, Skipped: 0
+> [INFO] BUILD SUCCESS
+> ```
 
 ---
 
@@ -357,24 +335,10 @@ mvn test
 
 ## ⚖️ Licença
 
-<div style="background-color: #2c2d30; padding: 10px 20px; line-height: 2rem;border-radius: 6px; border-left: 6px solid #cda44c; box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.2);">
-
-  <strong style="color: #cda44c;">
-    <svg viewBox="0 0 16 16" width="16" height="16" fill="#cda44c" style="vertical-align: middle; margin-right: 4px;">
-      <path d="M6.457 1.047c.659-1.234 2.427-1.234 3.086 0l6.082 11.378A1.75 1.75 0 0 1 14.082 15H1.918a1.75 1.75 0 0 1-1.543-2.575Zm1.763.707a.25.25 0 0 0-.44 0L1.698 13.132a.25.25 0 0 0 .22.368h12.164a.25.25 0 0 0 .22-.368Zm.53 3.996v2.5a.75.75 0 0 1-1.5 0v-2.5a.75.75 0 0 1 1.5 0ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"></path>
-    </svg>
-    Aviso
-  </strong><br>
-
-  <span style="color: #c9d1d9;">
-    Este projeto é parte de um trabalho acadêmico e destina-se exclusivamente para fins educacionais.
-  </span><br>
-
-  <span style="color: #c9d1d9; font-weight: bold;">
-    ⚖️ Licenciado sob a
-  </span><a href="LICENSE">MIT License</a>.
-
-</div>
+> [!WARNING]
+> Este projeto é parte de um trabalho acadêmico e destina-se exclusivamente para fins educacionais.
+>
+> ⚖️ Licenciado sob a [MIT License](LICENSE).
 
 
 
