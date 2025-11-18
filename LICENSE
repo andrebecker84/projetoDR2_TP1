@@ -1,0 +1,62 @@
+MIT License
+
+Copyright (c) 2025 André Luis Becker
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+---
+
+NOTA IMPORTANTE - Uso Acadêmico
+
+Este projeto é parte de um trabalho acadêmico da disciplina "DR2 - Clean Code e
+Boas Práticas" do Instituto Infnet, sob orientação do Prof. Rafael Bento Cruz.
+
+Permissões
+
+✅ Estudar, referenciar e aprender com este código
+✅ Modificar para fins educacionais pessoais
+✅ Usar como referência em discussões acadêmicas
+✅ Forked ou clonar para fins de aprendizado
+
+Restrições
+
+❌ Copiar integralmente para trabalhos acadêmicos (violação de integridade acadêmica)
+❌ Submeter como trabalho próprio sem citação
+❌ Usar comercialmente sem permissão
+❌ Remover atribuição de autoria
+❌ Redistribuir sem previa autorização
+
+Citação Recomendada
+
+```bibtex
+@software{becker2025dr2tp1,
+  author = {Becker, André Luis},
+  title = {TP1 - Clean Code e Boas Práticas},
+  year = {2025},
+  url = {https://github.com/andrebecker84/projetoDR2_TP1}
+}
+```
+
+Agradecimentos
+
+- Prof. Rafael Bento Cruz - Instituto Infnet
+- Robert C. Martin - Inspiração através de "Clean Code"
+- Comunidade Java - Suporte e recursos
+
+Para mais informações, consulte `README.md` e `doc/DOCUMENTACAO_TP1.md`.

@@ -1,0 +1,121 @@
+# ==================== Claude Code ====================
+.claude/
+./claude
+
+# ==================== Relatórios de Verificação ====================
+.relatorios_verificacao/
+
+# ==================== Maven ====================
+target/
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+pom.xml.next
+release.properties
+dependency-reduced-pom.xml
+buildNumber.properties
+.mvn/timing.properties
+.mvn/wrapper/maven-wrapper.jar
+
+# ==================== Java ====================
+*.class
+*.jar
+*.war
+*.ear
+*.log
+*.ctxt
+.mtj.tmp/
+
+# ==================== IntelliJ IDEA ====================
+.idea/
+*.iws
+*.iml
+*.ipr
+out/
+.idea_modules/
+
+# ==================== Eclipse ====================
+.settings/
+.classpath
+.project
+.metadata
+bin/
+tmp/
+*.tmp
+*.bak
+*.swp
+*~.nib
+local.properties
+.loadpath
+.recommenders
+
+# ==================== VSCode ====================
+.vscode/
+*.code-workspace
+.history/
+
+# ==================== NetBeans ====================
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+build/
+!**/src/main/**/build/
+!**/src/test/**/build/
+
+# ==================== OS ====================
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+*.cab
+*.msi
+*.msix
+*.msm
+*.msp
+*.lnk
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+
+# Linux
+*~
+.directory
+.Trash-*
+
+# ==================== Logs e Temporários ====================
+logs/
+*.log
+log/
+*.log.*
+temp/
+tmp/
+
+# ==================== Arquivos de Build e Deploy ====================
+*.zip
+*.tar.gz
+*.rar
+
+# ==================== Arquivos de Backup ====================
+*.bak
+*.backup
+*.old
+*~
+
+# ==================== Node (caso use algum build tool) ====================
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# ==================== Outros ====================
+.env
+.env.local
+.env.*.local
+secrets/
+credentials/
