@@ -57,8 +57,8 @@ Trabalho acadêmico de **Engenharia de Software** focado em **Clean Code** e **b
 ![Status](https://img.shields.io/badge/Status-Completo-success?style=plastic)
 ![Qualidade](https://img.shields.io/badge/Qualidade-A+-brightgreen?style=plastic)
 [![Build](https://img.shields.io/github/actions/workflow/status/andrebecker84/projetoDR2_TP1/maven.yml?style=plastic&logo=github-actions&logoColor=white&branch=main)](https://github.com/andrebecker84/projetoDR2_TP1/actions)
-[![Tests](https://img.shields.io/badge/Tests-46_passing-success?style=plastic&logo=junit5&logoColor=white)](https://github.com/andrebecker84/projetoDR2_TP1/actions)
-[![Coverage](https://img.shields.io/badge/Coverage-100%25-success?style=plastic&logo=codecov&logoColor=white)](https://github.com/andrebecker84/projetoDR2_TP1/actions)
+[![Tests](https://raw.githubusercontent.com/andrebecker84/projetoDR2_TP1/main/.github/badges/tests.svg)](https://github.com/andrebecker84/projetoDR2_TP1/actions)
+[![Coverage](https://raw.githubusercontent.com/andrebecker84/projetoDR2_TP1/main/.github/badges/coverage.svg)](https://github.com/andrebecker84/projetoDR2_TP1/actions)
 [![Branches](https://img.shields.io/badge/Branches-1-blue?style=plastic&logo=git&logoColor=white)](https://github.com/andrebecker84/projetoDR2_TP1/branches)
 
 ---
