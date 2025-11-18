@@ -349,6 +349,7 @@ Para cada exercício, segui um padrão:
 > [!TIP]
 >### c) Solução implementada:
 >- Dividi em **três camadas de abstração**:
+>
 >`Camada 1: Modelo (Dados)`
 >```java
 >public static class ItemCarrinho {
