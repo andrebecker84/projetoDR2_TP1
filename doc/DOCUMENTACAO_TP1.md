@@ -102,8 +102,8 @@ Para cada exercício, segui um padrão:
 
 ## 5. Análise dos 12 exercícios
 
-Antes de entrar nas análises específicas, vale entender os **quatro objetivos fundamentais** que todo código de alta qualidade deve alcançar:
-
+> Antes de entrar nas análises específicas, vale entender os **quatro objetivos fundamentais** que todo código de alta qualidade deve alcançar:
+>
 > [!TIP]
 > ### 4 Objetivos de Código de Alta Qualidade
 >
@@ -121,47 +121,44 @@ Antes de entrar nas análises específicas, vale entender os **quatro objetivos 
 ---
 
 ### Exercício 01 - Sistema Financeiro
+>### Código original:
+>```java
+>public class SistemaFinanceiro {
+>    private List contas;
+>    private List valores;
+>   
+>    public SistemaFinanceiro() {
+>        contas = new ArrayList<>();
+>        valores = new ArrayList<>();
+>    }
+>
+>    public void adicionarConta(String conta, double valor) {
+>        contas.add(conta);
+>        valores.add(valor);
+>    }
+>
+>    public void gerarRelatorio() {
+>        System.out.println("=== Relatório Financeiro ===");
+>        for (int i = 0; i < contas.size(); i++) {
+>            System.out.println(
+>                    "Conta: " + contas.get(i) + " - Saldo: " + valores.get(i));
+>        }
+>    }
+>
+>    public void processarPagamentos(double taxa) {
+>        for (int i = 0; i < valores.size(); i++) {
+>            valores.set(i, valores.get(i) - taxa);
+>        }
+>    }
+>}
+>```
 
-#### Código original:
-```java
-public class SistemaFinanceiro {
-    private List contas;
-    private List valores;
-   
-    public SistemaFinanceiro() {
-        contas = new ArrayList<>();
-        valores = new ArrayList<>();
-    }
+> [!NOTE]
+> ### 📋 Tarefa:
+>       a) Explique três problemas estruturais neste código.  
+>       b) Justifique por que esses problemas impactam a qualidade e manutenção do software.
 
-    public void adicionarConta(String conta, double valor) {
-        contas.add(conta);
-        valores.add(valor);
-    }
-
-    public void gerarRelatorio() {
-        System.out.println("=== Relatório Financeiro ===");
-        for (int i = 0; i < contas.size(); i++) {
-            System.out.println(
-                    "Conta: " + contas.get(i) + " - Saldo: " + valores.get(i));
-        }
-    }
-
-    public void processarPagamentos(double taxa) {
-        for (int i = 0; i < valores.size(); i++) {
-            valores.set(i, valores.get(i) - taxa);
-        }
-    }
-}
-```
-
-### 📋 Tarefa:
-
-> [!NOTE]  
-> a) Explique três problemas estruturais neste código.  
-> b) Justifique por que esses problemas impactam a qualidade e manutenção do software.
-
-#### a) Três problemas estruturais identificados:
-
+### a) Três problemas estruturais identificados:
 1. **Listas paralelas desacopladas**
 O código mantém duas listas separadas (`contas` e `valores`) que precisam estar sempre sincronizadas. Se eu adicionar um elemento em uma e esquecer da outra, o sistema quebra silenciosamente. Isso viola o princípio de coesão - dados que andam juntos deveriam estar juntos.
 2. **Acoplamento direto ao console**
@@ -169,126 +166,126 @@ O método `gerarRelatorio()` imprime diretamente no console com `System.out.prin
 3. **Falta de encapsulamento**
 Não existe uma entidade "Conta" no código. O conceito está espalhado em duas listas diferentes. Isso dificulta entender o que é uma conta e quais operações ela suporta.
 
-#### b) Impacto na qualidade e manutenção:
+### b) Impacto na qualidade e manutenção:
 - **Manutenção comprometida:** Se precisar adicionar um novo campo (como "tipo de conta"), teria que criar uma terceira lista e lembrar de mantê-las sincronizadas em todos os lugares. A complexidade cresce exponencialmente.
 - **Testabilidade prejudicada:** Como testar se o relatório está correto se ele imprime direto no console? Precisaria de hacks como redirecionar System.out, o que torna os testes frágeis.
 - **Extensibilidade limitada:** Quer processar taxas diferentes por tipo de conta? Quer gerar relatórios em formatos diferentes? Com a estrutura atual, isso vira um pesadelo rapidamente.
 
-#### Solução implementada:
-```java
-// Agora cada conta é uma entidade coesa
-public static class ContaFinanceira {
-    private final String titular;
-    private double saldo;
-    
-    public ContaFinanceira(String titular, double saldoInicial) {
-        this.titular = titular;
-        this.saldo = saldoInicial;
-    }
-
-    public void descontarTaxa(double taxa) {
-        this.saldo -= taxa;
-    }
-
-    public String formatarLinha() {
-        return String.format("Conta: %s - Saldo: R$ %.2f", titular, saldo);
-    }
-}
-
-private final List<ContaFinanceira> contas = new ArrayList<>();
-
-// Desacoplado do console - retorna dados
-public List<String> gerarRelatorio() {
-    return contas.stream()
-            .map(ContaFinanceira::formatarLinha)
-            .collect(Collectors.toList());
-}
-```
-> [!IMPORTANT]  
-> **Princípios aplicados:** SRP (responsabilidade única), encapsulamento, desacoplamento de I/O.
+>### Solução implementada:
+>```java
+>// Agora cada conta é uma entidade coesa
+>public static class ContaFinanceira {
+>    private final String titular;
+>    private double saldo;
+>    
+>    public ContaFinanceira(String titular, double saldoInicial) {
+>        this.titular = titular;
+>        this.saldo = saldoInicial;
+>    }
+>
+>    public void descontarTaxa(double taxa) {
+>        this.saldo -= taxa;
+>    }
+>
+>    public String formatarLinha() {
+>        return String.format("Conta: %s - Saldo: R$ %.2f", titular, saldo);
+>    }
+>}
+>
+>private final List<ContaFinanceira> contas = new ArrayList<>();
+>
+>// Desacoplado do console - retorna dados
+>public List<String> gerarRelatorio() {
+>    return contas.stream()
+>            .map(ContaFinanceira::formatarLinha)
+>            .collect(Collectors.toList());
+>}
+>```
+>>
+>> [!IMPORTANT]  
+>> #### Princípios aplicados:
+>> - SRP (responsabilidade única), encapsulamento, desacoplamento de I/O.
 
 ---
 
 ### Exercício 02 - Processador de Dados
+>### Código original:
+>```java
+>public class Processador {
+>    public void processar(String dado) {
+>        if (dado != null && !dado.isEmpty()) {
+>            if (dado.length() > 10) {
+>                System.out.println("Dado válido: " + dado);
+>            } else {
+>                System.out.println("Dado muito curto.");
+>            }
+>        } else {
+>            System.out.println("Dado inválido.");
+>        }
+>    }
+>}
+>```
 
-#### Código original:
-```java
-public class Processador {
-    public void processar(String dado) {
-        if (dado != null && !dado.isEmpty()) {
-            if (dado.length() > 10) {
-                System.out.println("Dado válido: " + dado);
-            } else {
-                System.out.println("Dado muito curto.");
-            }
-        } else {
-            System.out.println("Dado inválido.");
-        }
-    }
-}
-```
+> [!NOTE]
+>### 📋 Tarefa:
+>       a) Explique como este código falha em atingir os quatro objetivos de um código de alta qualidade:
+>           a.a) Legibilidade
+>           a.b) Redução de duplicação
+>           a.c) Facilidade de modificação
+>           a.d) Eficácia na comunicação
 
-### 📋 Tarefa:
-> [!NOTE]  
-> a) Explique como este código falha em atingir os quatro objetivos de um código de alta qualidade:
-> 
->       a.a) Legibilidade
->       a.b) Redução de duplicação
->       a.c) Facilidade de modificação
->       a.d) Eficácia na comunicação
-
-#### a.a) Legibilidade
+### a.a) Legibilidade:
 - O código usa **IFs aninhados**, o que força o leitor a manter múltiplos contextos na cabeça ao mesmo tempo. Você precisa entender a condição externa antes de entender a interna. É como uma frase em russo dentro de outra frase em alemão.
 - Guard clauses (retornos antecipados) são muito mais legíveis porque tratam as exceções primeiro e deixam o fluxo principal por último.
 
-#### a.b) Redução de duplicação
+### a.b) Redução de duplicação:
 - A string `"System.out.println"` aparece **três vezes**. Se eu quiser mudar o formato da saída ou logar em um arquivo, preciso editar três lugares diferentes. Isso é uma violação direta do princípio DRY (Don't Repeat Yourself).
 
-#### a.c) Facilidade de modificação
+### a.c) Facilidade de modificação:
 - Se eu quiser adicionar uma nova validação (por exemplo, "dado não pode conter números"), onde eu coloco? Dentro do primeiro if? Crio outro if aninhado? O código não oferece uma estrutura clara para extensão.
 - Além disso, está acoplado ao console. Não consigo usar essa lógica em um contexto diferente (API REST, processamento batch) sem reescrever.
 
-#### a.d) Eficácia na comunicação
+### a.d) Eficácia na comunicação:
 - O que este método faz? Valida? Processa? Imprime? Faz tudo junto. O nome `processar` é vago e não comunica intenção clara. As condições também não explicam *por que* 10 caracteres é o mínimo.
 
-#### Solução implementada:
-```java
-private static final int TAMANHO_MINIMO = 10;  // Constante nomeada explica o "porquê"
-
-public String processar(String dado) {
-    // Guard clauses - lida com casos excepcionais primeiro
-    if (isInvalido(dado)) {
-        return "Dado inválido.";
-    }
-
-    if (isMuitoCurto(dado)) {
-        return "Dado muito curto.";
-    }
-
-    // Fluxo principal fica no final, claro e direto
-    return formatarDadoValido(dado);
-}
-
-// Métodos pequenos com nomes que comunicam intenção
-private boolean isInvalido(String dado) {
-    return dado == null || dado.isEmpty();
-}
-
-private boolean isMuitoCurto(String dado) {
-    return dado.length() <= TAMANHO_MINIMO;
-}
-
-private String formatarDadoValido(String dado) {
-    return "Dado válido: " + dado;
-}
-```
-
-> [!IMPORTANT]
-> #### Melhorias alcançadas:
-> - ✅ **Legibilidade:** Fluxo linear, sem aninhamento.
-> - ✅ **DRY:** Sem duplicação de lógica ou saída.
-> - ✅ **Modificação:** Fácil adicionar novas validações.
-> - ✅ **Comunicação:** Nomes revelam intenção claramente.
+>### Solução implementada:
+>```java
+>private static final int TAMANHO_MINIMO = 10;  // Constante nomeada explica o "porquê"
+>
+>public String processar(String dado) {
+>    // Guard clauses - lida com casos excepcionais primeiro
+>    if (isInvalido(dado)) {
+>        return "Dado inválido.";
+>    }
+>
+>    if (isMuitoCurto(dado)) {
+>        return "Dado muito curto.";
+>    }
+>
+>    // Fluxo principal fica no final, claro e direto
+>    return formatarDadoValido(dado);
+>}
+>
+>// Métodos pequenos com nomes que comunicam intenção
+>private boolean isInvalido(String dado) {
+>    return dado == null || dado.isEmpty();
+>}
+>
+>private boolean isMuitoCurto(String dado) {
+>    return dado.length() <= TAMANHO_MINIMO;
+>}
+>
+>private String formatarDadoValido(String dado) {
+>    return "Dado válido: " + dado;
+>}
+>```
+>
+>> [!IMPORTANT]
+>> #### Melhorias alcançadas:
+>> - ✅ **Legibilidade:** Fluxo linear, sem aninhamento.
+>> - ✅ **DRY:** Sem duplicação de lógica ou saída.
+>> - ✅ **Modificação:** Fácil adicionar novas validações.
+>> - ✅ **Comunicação:** Nomes revelam intenção claramente.
 
 ---
 
@@ -328,7 +325,7 @@ private String formatarDadoValido(String dado) {
 >       b) Explique como essas falhas afetam a manutenibilidade e a extensibilidade do código.  
 >       c) Implemente uma solução dividindo o problema em subproblemas e camadas de abstração.  
 
-#### a) Problemas estruturais identificados:
+### a) Problemas estruturais identificados:
 1. **Listas paralelas (produtos, preços, quantidades)**
 Mesma história do Ex01 - informações relacionadas (de um mesmo item) estão espalhadas em três listas diferentes. Se eu esquecer de adicionar em uma delas, o sistema entra em estado inconsistente.
 2. **Violação do SRP (Single Responsibility Principle)**
@@ -336,14 +333,13 @@ A classe `calcularTotal()` não apenas calcula - ela também imprime. Mistura l�
 3. **Falta de modelo de domínio**
 Não existe uma classe que represente "Item do Carrinho". O conceito está fragmentado nas listas.
 
-#### b) Impacto na manutenibilidade e extensibilidade:
+### b) Impacto na manutenibilidade e extensibilidade:
 - **Manutenibilidade:** Adicionar desconto por item? Preciso criar quarta lista. Calcular peso total? Quinta lista. A cada nova funcionalidade, a complexidade cresce descontroladamente.
 - **Extensibilidade:** Como fazer relatório em JSON? Como calcular impostos diferentes por categoria de produto? O código atual não oferece pontos de extensão claros. Você precisaria duplicar tudo.
 - **Testabilidade:** Como testar se o cálculo está correto sem verificar o que foi impresso no console? Testes frágeis que dependem de strings hardcoded.
 
-#### c) Solução implementada:
+### c) Solução implementada:
 - Dividi em **três camadas de abstração**:
-
 >`Camada 1: Modelo (Dados)`
 >```java
 >public static class ItemCarrinho {
@@ -441,7 +437,7 @@ Não existe uma classe que represente "Item do Carrinho". O conceito está fragm
 >       a) Analise o código e identifique problemas de separação de responsabilidades.
 >       b) Escreva duas classes, Livro e Biblioteca, separadas de acordo com os problemas identificados.
 
-#### a) Problemas de separação de responsabilidades:
+### a) Problemas de separação de responsabilidades:
 1. **Conceitos misturados**
 A classe `SistemaBiblioteca` tenta ser tanto um Livro quanto uma Biblioteca. Não há separação entre a entidade (Livro) e a coleção (Biblioteca). É como misturar "Aluno" com "Turma" na mesma classe.
 2. **Estado e comportamento distribuídos**
@@ -449,8 +445,8 @@ O estado "disponível" de um livro está em uma lista separada do próprio livro
 3. **Busca linear ineficiente**
 Cada operação percorre toda a lista procurando por título. Em uma biblioteca com 10.000 livros, isso é desperdício. Um `Map<String, Livro>` seria muito mais eficiente.
 
-#### b) Solução com duas classes separadas:
->`Classe Livro (Entidade)`
+### b) Solução com duas classes separadas:
+>#### `Classe Livro (Entidade)`
 >```java
 >public static class Livro {
 >    private final String titulo;
@@ -480,7 +476,7 @@ Cada operação percorre toda a lista procurando por título. Em uma biblioteca 
 >```
 >>O Livro sabe seu próprio estado. Não precisa de ninguém dizendo se está disponível ou não - ele mesmo gerencia isso.
 
->`Classe Biblioteca (Gerenciador de coleção)`
+>#### `Classe Biblioteca (Gerenciador de coleção)`
 >```java
 >public static class Biblioteca {
 >    private final List<Livro> acervo = new ArrayList<>();
@@ -564,15 +560,15 @@ Cada operação percorre toda a lista procurando por título. Em uma biblioteca 
 >```
 
 > [!NOTE]
->### 📋 Tarefa:
->
+> ### 📋 Tarefa:
 >       a) Separe a funcionalidade em camadas distintas (modelo, serviço e interface) utilizando princípios de abstração.
 
-#### Problema original:
-- A classe `SistemaBancario` faz tudo: guarda contas, gerencia saldos, valida transferências e imprime mensagens. Impossível testar transferências sem verificar strings de saída.
+> [!CAUTION]
+> ### Problema original:
+>   - A classe `SistemaBancario` faz tudo: guarda contas, gerencia saldos, valida transferências e imprime mensagens. Impossível testar transferências sem verificar strings de saída.
 
-#### Solução em 3 camadas:
->`Camada 1: MODELO (Representa uma conta)`
+### Solução em 3 camadas:
+>#### `Camada 1: MODELO (Representa uma conta)`
 >```java
 >public static class Conta {
 >    private final String titular;
@@ -598,7 +594,7 @@ Cada operação percorre toda a lista procurando por título. Em uma biblioteca 
 >```
 >>A conta conhece suas próprias operações básicas. Não sabe nada sobre transferências ou validações complexas.
 
->`Camada 2: SERVIÇO (Lógica de negócio)`
+>#### `Camada 2: SERVIÇO (Lógica de negócio)`
 >```java
 >public static class ServicoBancario {
 >    private final Map<String, Conta> contas = new HashMap<>();
@@ -632,7 +628,7 @@ Cada operação percorre toda a lista procurando por título. Em uma biblioteca 
 >```
 >>O serviço coordena as validações e operações. Retorna um objeto (não imprime), permitindo que quem chamou decida o que fazer com o resultado.
 
->`Camada 3: INTERFACE (Resultado da operação (DTO))`
+>#### `Camada 3: INTERFACE (Resultado da operação (DTO))`
 >```java
 >public static class ResultadoTransferencia {
 >    private final boolean sucesso;
@@ -682,49 +678,49 @@ Cada operação percorre toda a lista procurando por título. Em uma biblioteca 
 > 
 >       a) Divida o problema em métodos menores e com responsabilidades claras, facilitando a reutilização.
 
-#### Problema original:
+### Problema original:
 - Um único método `gerarRelatorio()` faz tudo: imprime cabeçalho, itera clientes, formata linhas, imprime rodapé. Se eu quiser mudar apenas a formatação de uma linha, preciso entender o método inteiro.
 
-#### Solução - Decomposição em funções pequenas:
-```java
-public List<String> gerarRelatorio(List<String> clientes, List<Double> saldos) {
-    List<String> relatorio = new ArrayList<>();
-
-    adicionarCabecalho(relatorio);
-    adicionarLinhasClientes(relatorio, clientes, saldos);
-    adicionarRodape(relatorio);
-
-    return relatorio;
-}
-
-private void adicionarCabecalho(List<String> relatorio) {
-    relatorio.add("=== Relatório Financeiro ===");
-}
-
-private void adicionarLinhasClientes(List<String> relatorio,
-                                     List<String> clientes,
-                                     List<Double> saldos) {
-    for (int i = 0; i < clientes.size(); i++) {
-        relatorio.add(formatarLinhaCliente(clientes.get(i), saldos.get(i)));
-    }
-}
-
-private String formatarLinhaCliente(String cliente, Double saldo) {
-    return String.format("Cliente: %s - Saldo: R$ %.2f", cliente, saldo);
-}
-
-private void adicionarRodape(List<String> relatorio) {
-    relatorio.add("===========================");
-    relatorio.add("Fim do Relatório");
-}
-```
-
-> [!IMPORTANT]
->### Por que isso é melhor?
->1. **Funções fazem UMA coisa:** Cada método tem 1-3 linhas e um propósito cristalino. Não preciso de comentário porque o nome já diz tudo.
->2. **Reutilização:** Quer um relatório sem rodapé? Só não chama `adicionarRodape()`. Quer mudar formato do cabeçalho? Edita apenas `adicionarCabecalho()`.
->3. **Testabilidade:** Consigo testar `formatarLinhaCliente()` isoladamente sem gerar relatório completo.
->4. **Leitura facilitada:** O método principal tem leitura facilitada, como se fosse uma receita: "Adicione cabeçalho, adicione linhas, adicione rodapé". Qualquer pessoa entende o fluxo.
+>### Solução - Decomposição em funções pequenas:
+>```java
+>public List<String> gerarRelatorio(List<String> clientes, List<Double> saldos) {
+>    List<String> relatorio = new ArrayList<>();
+>
+>    adicionarCabecalho(relatorio);
+>    adicionarLinhasClientes(relatorio, clientes, saldos);
+>    adicionarRodape(relatorio);
+>
+>    return relatorio;
+>}
+>
+>private void adicionarCabecalho(List<String> relatorio) {
+>    relatorio.add("=== Relatório Financeiro ===");
+>}
+>
+>private void adicionarLinhasClientes(List<String> relatorio,
+>                                     List<String> clientes,
+>                                     List<Double> saldos) {
+>    for (int i = 0; i < clientes.size(); i++) {
+>        relatorio.add(formatarLinhaCliente(clientes.get(i), saldos.get(i)));
+>    }
+>}
+>
+>private String formatarLinhaCliente(String cliente, Double saldo) {
+>    return String.format("Cliente: %s - Saldo: R$ %.2f", cliente, saldo);
+>}
+>
+>private void adicionarRodape(List<String> relatorio) {
+>    relatorio.add("===========================");
+>    relatorio.add("Fim do Relatório");
+>}
+>```
+>>
+>> [!IMPORTANT]
+>>### Por que isso é melhor?
+>>1. **Funções fazem UMA coisa:** Cada método tem 1-3 linhas e um propósito cristalino. Não preciso de comentário porque o nome já diz tudo.
+>>2. **Reutilização:** Quer um relatório sem rodapé? Só não chama `adicionarRodape()`. Quer mudar formato do cabeçalho? Edita apenas `adicionarCabecalho()`.
+>>3. **Testabilidade:** Consigo testar `formatarLinhaCliente()` isoladamente sem gerar relatório completo.
+>>4. **Leitura facilitada:** O método principal tem leitura facilitada, como se fosse uma receita: "Adicione cabeçalho, adicione linhas, adicione rodapé". Qualquer pessoa entende o fluxo.
 
 ---
 
@@ -762,30 +758,30 @@ private void adicionarRodape(List<String> relatorio) {
 >       b) Implemente validações para impedir depósitos negativos e saques superiores ao saldo, aplicando contratos explícitos.
 
 ### a) Problemas identificados - Estados inválidos permitidos:
-#### 1. Saldo inicial negativo:
-```java
-ContaBancaria conta = new ContaBancaria("João", -100.00);  // ACEITO! ❌
-```
-> [!CAUTION]
->
-> Uma conta com saldo negativo no momento da criação não faz sentido no mundo real.
+>#### 1. Saldo inicial negativo:
+>```java
+>ContaBancaria conta = new ContaBancaria("João", -100.00);  // ACEITO! ❌
+>```
+>> [!CAUTION]
+>>
+>> Uma conta com saldo negativo no momento da criação não faz sentido no mundo real.
 
-#### 2. Depósitos negativos/zero:
-```java
-conta.depositar(-50.00);  // ACEITO! ❌
-conta.depositar(0);       // ACEITO! ❌
-```
-> [!CAUTION]
->
-> Depositar valor negativo ou zero não tem significado. É uma operação inválida que deveria ser rejeitada.
+>#### 2. Depósitos negativos/zero:
+>```java
+>conta.depositar(-50.00);  // ACEITO! ❌
+>conta.depositar(0);       // ACEITO! ❌
+>```
+>> [!CAUTION]
+>>
+>> Depositar valor negativo ou zero não tem significado. É uma operação inválida que deveria ser rejeitada.
 
-#### 3. Saques acima do saldo:
-```java
-conta.sacar(1000.00);  // Saldo era 100, agora é -900! ❌
-```
-> [!CAUTION]
->
-> Permite saldo negativo através de saque. Não há validação alguma.
+>#### 3. Saques acima do saldo:
+>```java
+>conta.sacar(1000.00);  // Saldo era 100, agora é -900! ❌
+>```
+>> [!CAUTION]
+>>
+>> Permite saldo negativo através de saque. Não há validação alguma.
 
 >### b) Solução com validações e contratos explícitos:
 >```java
@@ -861,25 +857,24 @@ conta.sacar(1000.00);  // Saldo era 100, agora é -900! ❌
 >    }
 >}
 >```
-
-> [!IMPORTANT]
-> ### Melhorias alcançadas:
-> #### `Contratos explícitos estabelecidos`:
-> - ✅ Titular nunca é nulo ou vazio
-> - ✅ Saldo inicial sempre >= 0
-> - ✅ Depósitos sempre > 0
-> - ✅ Saques sempre > 0 e <= saldo atual
->
-> #### `Fail-fast`: 
-> - ✅ Erros são detectados imediatamente no momento da chamada, não depois.
->
-> #### `Mensagens descritivas`:
-> - ✅ Cada exceção diz exatamente o que está errado e qual foi o valor recebido.
+>>
+>> [!IMPORTANT]
+>> ### Melhorias alcançadas:
+>> #### `Contratos explícitos estabelecidos`:
+>> - ✅ Titular nunca é nulo ou vazio
+>> - ✅ Saldo inicial sempre >= 0
+>> - ✅ Depósitos sempre > 0
+>> - ✅ Saques sempre > 0 e <= saldo atual
+>>
+>> #### `Fail-fast`: 
+>> - ✅ Erros são detectados imediatamente no momento da chamada, não depois.
+>>
+>> #### `Mensagens descritivas`:
+>> - ✅ Cada exceção diz exatamente o que está errado e qual foi o valor recebido.
 
 ---
 
 ### Exercício 08 - Pedido
-
 >### Código original:
 >```java
 >public class Pedido {
@@ -940,7 +935,7 @@ conta.sacar(1000.00);  // Saldo era 100, agora é -900! ❌
 >>
 >> Problema: 90% dos comentários não agregam valor. Só repetem o que o código já diz.
 
->#### Solução - Código auto-explicativo:
+>#### Solução (_código auto-explicativo_):
 >```java
 >public class Ex08 {
 >    private int id;
@@ -976,27 +971,26 @@ conta.sacar(1000.00);  // Saldo era 100, agora é -900! ❌
 >    }
 >}
 >```
-
-> [!IMPORTANT]
-> ### Melhorias aplicadas:
-> #### O que mudou:
 >
-> a) **Removidos comentários redundantes:**
->   - `// Identificação do pedido` → O nome `id` já diz isso.
->   - `// Construtor do pedido` → Óbvio, já está evidente.
->   - `// Define o ID` → Só repete `this.id = id`.
->
-> b) **Comentário útil adicionado:**
->   - O Javadoc em `alterarId()` explica **POR QUE** este método existe e **QUANDO** usá-lo. Isso não é óbvio apenas lendo o código.
->
-> c) **Código modificado para dispensar comentários:**
->   - Usei `final` em `descricao` e `valor` → comunica intenção (imutáveis).
->   - Nomes claros dispensam explicações.
->   - Estrutura simples não precisa de documentação extra.
->
->> [!TIP]
+>> [!IMPORTANT]
+>> ### Melhorias aplicadas:
 >>
->> **Regra de ouro:** Comente o *por quê*, não o *quê*. Se você sente necessidade de comentar o "quê", refatore o código.
+>> a) **Removidos comentários redundantes:**
+>>   - `// Identificação do pedido` → O nome `id` já diz isso.
+>>   - `// Construtor do pedido` → Óbvio, já está evidente.
+>>   - `// Define o ID` → Só repete `this.id = id`.
+>>
+>> b) **Comentário útil adicionado:**
+>>   - O Javadoc em `alterarId()` explica **POR QUE** este método existe e **QUANDO** usá-lo. Isso não é óbvio apenas lendo o código.
+>>
+>> c) **Código modificado para dispensar comentários:**
+>>   - Usei `final` em `descricao` e `valor` → comunica intenção (imutáveis).
+>>   - Nomes claros dispensam explicações.
+>>   - Estrutura simples não precisa de documentação extra.
+>>>
+>>> [!TIP]
+>>>
+>>> **Regra de ouro:** Comente o *por quê*, não o *quê*. Se você sente necessidade de comentar o "quê", refatore o código.
 
 ---
 
@@ -1011,7 +1005,6 @@ conta.sacar(1000.00);  // Saldo era 100, agora é -900! ❌
 
 > [!NOTE]
 > ### 📋 Tarefa:
->
 >       a) Corrija a indentação, espaçamento e separação de blocos para garantir clareza e legibilidade.
 
 > [!CAUTION]
@@ -1229,7 +1222,6 @@ conta.sacar(1000.00);  // Saldo era 100, agora é -900! ❌
 >>```
 >>
 >> ### Benefícios alcançados:
->>
 >> - a) **Sinalização explícita:** Lista todos os problemas encontrados.  
 >> - b) **Sistema robusto:** Classe de resposta type-safe, sem strings mágicas.  
 >> - c) **Múltiplos erros:** Poderia validar tudo de uma vez e retornar lista completa.  
@@ -1274,7 +1266,7 @@ conta.sacar(1000.00);  // Saldo era 100, agora é -900! ❌
 >}
 >```
 >
->>**Problemas:**
+>>**Problemas Identificados:**
 >> 1. String `"cartao"` vs `"cartão"` vs `"Cartao"` → inconsistências.
 >> 2. Todos os erros viram apenas `System.out.println` → não dá pra tratar diferente.
 >> 3. Valor negativo é aceito sem validação.
