@@ -2,10 +2,8 @@ DOCUMENTAÇÃO DETALHADA - Teste Performance 1 `DR2_TP1`
 
 ---
 
-# Engenharia Disciplinada de Softwares
 ## TP1 - Refatorar Códigos em Java com Clean Code e Boas Práticas
 
-> [!IMPORTANT]
 > Escola Superior de Tecnologia da Informação  
 > Instituto Infnet - https://www.infnet.edu.br/
 >
@@ -17,9 +15,9 @@ DOCUMENTAÇÃO DETALHADA - Teste Performance 1 `DR2_TP1`
 > 
 >       Entrega: 11/11/2025
 
+---
 
 ## Sumário
-
 1. [Visão geral](#1-visão-geral)
 2. [Objetivo do trabalho](#2-objetivo-do-trabalho)
 3. [Metodologia](#3-metodologia)
