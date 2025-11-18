@@ -791,6 +791,8 @@ Para cada exercício, segui um padrão:
 >```
 > Uma conta com saldo negativo no momento da criação não faz sentido no mundo real.
 >
+> ---
+> 
 >### `2. Depósitos negativos/zero`:
 >```java
 >conta.depositar(-50.00);  // ACEITO! ❌
@@ -798,6 +800,8 @@ Para cada exercício, segui um padrão:
 >```
 > Depositar valor negativo ou zero não tem significado. É uma operação inválida que deveria ser rejeitada.
 >
+> ---
+> 
 >### `3. Saques acima do saldo`:
 >```java
 >conta.sacar(1000.00);  // Saldo era 100, agora é -900! ❌
@@ -1377,46 +1381,49 @@ Para cada exercício, segui um padrão:
 
 > [!IMPORTANT]
 > ### Benefícios alcançados:
->   - a) **Exceções específicas** → Cada tipo de erro tem tratamento próprio.  
->   - b) **Type-safe com Enum** → Impossível ter typo em "cartao".  
->   - c) **Fluxo seguro** → Compilador força tratamento de exceções.  
->   - d) **Mensagens claras** → Cada exceção explica exatamente o problema.  
->   - e) **Extensível** → Adicionar PIX foi só incluir no enum.  
+>> a) **Exceções específicas** → Cada tipo de erro tem tratamento próprio.  
+>> b) **Type-safe com Enum** → Impossível ter typo em "cartao".  
+>> c) **Fluxo seguro** → Compilador força tratamento de exceções.  
+>> d) **Mensagens claras** → Cada exceção explica exatamente o problema.  
+>> e) **Extensível** → Adicionar PIX foi só incluir no enum.  
 
 ---
 
 ## 6. Princípios e práticas aplicadas
-### SOLID
-- **`SRP` (`S`ingle Responsibility):** Cada classe tem uma razão para mudar. Se o formato do relatório muda, você edita apenas o formatador, não a lógica de cálculo.
-- **`OCP` (`O`pen/Closed):** Você consegue adicionar novos métodos de pagamento (enum) sem mexer no código existente.
-- **`DIP` (`D`ependency Inversion):** Métodos retornam abstrações (`List<String>`) em vez de imprimir direto. Isso desacopla a classe de System.out.
 
-### DRY, KISS, YAGNI
-- **`DRY` (Don't Repeat Yourself):** Validações e formatações reutilizáveis. Se a regra muda, você edita uma vez.
-- **`KISS` (Keep It Simple):** Códigos diretos, sem estruturas complexas desnecessárias.
-- **`YAGNI` (You Aren't Gonna Need It):** Implementei apenas o que foi pedido. Sem features especulativas.
+> [!TIP]
+>### `SOLID`:
+>- **`SRP` (`S`ingle Responsibility):** Cada classe tem uma razão para mudar. Se o formato do relatório muda, você edita apenas o formatador, não a lógica de cálculo.
+>- **`OCP` (`O`pen/Closed):** Você consegue adicionar novos métodos de pagamento (enum) sem mexer no código existente.
+>- **`DIP` (`D`ependency Inversion):** Métodos retornam abstrações (`List<String>`) em vez de imprimir direto. Isso desacopla a classe de System.out.
 
-### CQS (Command-Query Separation)
-> [!NOTE]
->
+> [!TIP]
+>### `DRY`, `KISS`, `YAGNI`:
+>- **`DRY` (Don't Repeat Yourself):** Validações e formatações reutilizáveis. Se a regra muda, você edita uma vez.
+>- **`KISS` (Keep It Simple):** Códigos diretos, sem estruturas complexas desnecessárias.
+>- **`YAGNI` (You Aren't Gonna Need It):** Implementei apenas o que foi pedido. Sem features especulativas.
+
+> [!TIP]
+>### CQS (Command-Query Separation)
 > Métodos que mudam estado (`debitar()`, `emprestar()`) são diferentes de métodos que consultam (`getSaldo()`, `isDisponivel()`). Isso torna claro o impacto de cada método.
 
 ---
 
 ## 7. Testes unitários
->[!NOTE]
+>[!IMPORTANT]
 > 
 > Criei 46 testes cobrindo todos os exercícios.
 
-### Estratégia:
-- Teste de sucesso (caminho feliz).
-- Teste de erro (validações, exceções).
-- Teste de comportamento específico.
-
-### Padrão AAA:
-1. **Arrange** - preparar dados
-2. **Act** - executar
-3. **Assert** - verificar resultado
+>[!TIP]
+>### Estratégia:
+>- Teste de sucesso (caminho feliz).
+>- Teste de erro (validações, exceções).
+>- Teste de comportamento específico.
+>
+>### Padrão AAA:
+>1. **Arrange** - preparar dados
+>2. **Act** - executar
+>3. **Assert** - verificar resultado
 
 >#### Exemplo:
 >```java
